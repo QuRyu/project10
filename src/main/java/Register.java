@@ -12,7 +12,15 @@ public class Register {
     public static final String RD = "11111100";
     public static final String RE = "11111011";
 
-    // present registers
-    public static final ArrayList<String> registers = new ArrayList<String>(Arrays.asList("RA", "RB", "RC", "RD", "RE"));
+    // register table
+    public static final ArrayList<String> regularRegisters = new ArrayList<String>(Arrays.asList("RA", "RB", "RC", "RD", "RE"));
 
+    public static final ArrayList<String> tableB = new ArrayList<String>(Arrays.asList("RA", "RB", "RC", "RD", "RE", "SP"));
+
+    public static final ArrayList<String> tableC = new ArrayList<String>(Arrays.asList("RA", "RB", "RC", "RD", "RE", "SP", "PC", "CR"));
+
+    public static final ArrayList<String> tableD = new ArrayList<String>(Arrays.asList("RA", "RB", "RC", "RD", "RE", "SP", "PC", "IR"));
+
+    public static final ArrayList<String> tableE = new ArrayList<String>(Arrays.asList("RA", "RB", "RC", "RD", "RE", "SP", "Zeros", "Ones"));
 }
+
