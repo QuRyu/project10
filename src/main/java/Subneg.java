@@ -1,14 +1,11 @@
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by Quentin on 12/5/17.
  */
 public class Subneg {
     private String opA;
     private String opB;
-    private src_type srcA;
-    private src_type srcB;
+    private Addressing_mode srcA;
+    private Addressing_mode srcB;
 
     private String jumpToAddr;
     private addr_type atype;
@@ -18,32 +15,22 @@ public class Subneg {
     // PC denotes sequential implementation, while ADDR denotes jump_to address
     enum addr_type {PC, ADDR, RELATIVE}
 
-    // type of addresses
-    enum src_type {IM, REGISTER, MEMORY, Input, Output}
-    private final static Map<src_type, String> src_map = new HashMap<src_type, String>();
-    static {
-        src_map.put(src_type.IM, "000");
-        src_map.put(src_type.REGISTER, "001");
-        src_map.put(src_type.MEMORY, "010");
-        src_map.put(src_type.Input, "011");
-        src_map.put(src_type.Output, "100");
-    }
 
-    public Subneg(src_type srcA, String opA, src_type srcB, String opB) {
+    public Subneg(Addressing_mode srcA, String opA, Addressing_mode srcB, String opB) {
         this(srcA, opA, srcB, opB, addr_type.PC);
     }
 
-    public Subneg(src_type srcA, String opA, src_type srcB, String opB, int relative) {
+    public Subneg(Addressing_mode srcA, String opA, Addressing_mode srcB, String opB, int relative) {
         this(srcA, opA, srcB, opB, addr_type.RELATIVE);
         this.relative = relative;
     }
 
-    public Subneg(src_type srcA, String opA, src_type srcB, String opB, String jumpAddr) {
+    public Subneg(Addressing_mode srcA, String opA, Addressing_mode srcB, String opB, String jumpAddr) {
         this(srcA, opA, srcB, opB, addr_type.ADDR);
         this.jumpToAddr = jumpAddr;
     }
 
-    public Subneg(src_type srcA, String opA, src_type srcB, String opB, addr_type atype) {
+    public Subneg(Addressing_mode srcA, String opA, Addressing_mode srcB, String opB, addr_type atype) {
         this.srcA = srcA;
         this.opA = opA;
         this.srcB = srcB;
@@ -53,9 +40,9 @@ public class Subneg {
 
     public String dump(int curPC) {
         StringBuilder temp = new StringBuilder();
-        temp.append(src_map.get(srcA));
+        temp.append(srcA.binary_representation());
         temp.append(opA);
-        temp.append(src_map.get(srcB));
+        temp.append(srcB.binary_representation());
         temp.append(opB);
         switch (atype) {
             case ADDR:
