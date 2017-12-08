@@ -28,6 +28,11 @@ public enum Addressing_mode {
         public String binary_representation() {
             return "100";
         }
+    }, MEMORY_INDIRECT { // read value from register, but use that value to index into memory to get the value
+        @Override
+        public String binary_representation() {
+            return "101";
+        }
     };
 
     public abstract String binary_representation();
