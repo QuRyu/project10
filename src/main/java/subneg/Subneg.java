@@ -1,6 +1,5 @@
 package subneg;
 
-import instruction_type.AddressType;
 import instruction_type.Addressing_mode;
 import instruction_type.Operand;
 import utilities.Util;
@@ -17,6 +16,10 @@ public class Subneg {
     private Operand jumpToAddr;
     private AddressType atype;
     private int relative;
+
+    public enum AddressType {
+        PC, ADDR, RELATIVE;
+    }
 
     public Subneg(Addressing_mode srcA, Operand opA, Addressing_mode srcB, Operand opB) {
         this(srcA, opA, srcB, opB, AddressType.PC);
