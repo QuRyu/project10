@@ -17,4 +17,18 @@ public class MemoryAddr implements Operand {
         return n;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MemoryAddr that = (MemoryAddr) o;
+
+        return n.equals(that.n);
+    }
+
+    @Override
+    public int hashCode() {
+        return n.hashCode();
+    }
 }

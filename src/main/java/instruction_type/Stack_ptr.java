@@ -8,7 +8,7 @@ public class Stack_ptr implements Operand {
     public static Stack_ptr ptr = new Stack_ptr();
 
     private Stack_ptr() {
-        n = 0;
+        n = -1;
     }
 
     public String binary_representation() {
@@ -23,4 +23,18 @@ public class Stack_ptr implements Operand {
         n -= 1;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Stack_ptr stack_ptr = (Stack_ptr) o;
+
+        return n == stack_ptr.n;
+    }
+
+    @Override
+    public int hashCode() {
+        return n;
+    }
 }

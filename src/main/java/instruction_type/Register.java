@@ -43,5 +43,20 @@ public class Register implements Operand {
     public String binary_representation() {
         return register_tbl.get(type);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Register register = (Register) o;
+
+        return type == register.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return type.hashCode();
+    }
 }
 

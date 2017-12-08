@@ -20,4 +20,19 @@ public class Immediate implements Operand {
     public String binary_representation() {
         return n;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Immediate immediate = (Immediate) o;
+
+        return n.equals(immediate.n);
+    }
+
+    @Override
+    public int hashCode() {
+        return n.hashCode();
+    }
 }
