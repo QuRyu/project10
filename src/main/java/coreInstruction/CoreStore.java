@@ -1,3 +1,8 @@
+package coreInstruction;
+
+import instruction_type.Addressing_mode;
+import subneg.Subneg;
+
 import java.util.ArrayList;
 
 /**

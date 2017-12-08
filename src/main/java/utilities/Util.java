@@ -1,3 +1,5 @@
+package utilities;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -5,9 +7,13 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 public class Util {
 
+    // output 8 bit long binary number
     public static String convertToBinary(String n) {
+        // convert string to int,
+        // call the overloaded version
         throw new NotImplementedException();
     }
+
     public static String convertToBinary(int n) {
         throw new NotImplementedException();
     }

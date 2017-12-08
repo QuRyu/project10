@@ -1,3 +1,5 @@
+package instruction_type;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 

@@ -1,3 +1,7 @@
+package coreInstruction;
+
+import subneg.Subneg;
+
 import java.util.ArrayList;
 
 /**

@@ -1,9 +1,11 @@
+package coreInstruction;
+
 import java.util.ArrayList;
 
 /**
  * Created by Quentin on 12/6/17.
  */
-// Add instruction
+// instruction.Add instruction
 public class CoreInc extends CoreInstruction {
     private String src;
     private Addressing_mode src_mode;
