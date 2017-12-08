@@ -9,7 +9,7 @@ import utilities.Util;
  */
 public class Subneg {
     private Operand opA;
-    private  Operand opB;
+    private Operand opB;
     private Addressing_mode srcA;
     private Addressing_mode srcB;
 
@@ -43,7 +43,7 @@ public class Subneg {
         this.atype = atype;
     }
 
-    public String dump(int curPC, int stack_ptr) {
+    public String dump(int curPC) {
         StringBuilder temp = new StringBuilder();
         temp.append(srcA.binary_representation());
         temp.append(opA);
@@ -62,4 +62,27 @@ public class Subneg {
         return temp.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Subneg subneg = (Subneg) o;
+
+        if (!opA.equals(subneg.opA)) return false;
+        if (!opB.equals(subneg.opB)) return false;
+        if (srcA != subneg.srcA) return false;
+        if (srcB != subneg.srcB) return false;
+        return atype == subneg.atype;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = opA.hashCode();
+        result = 31 * result + opB.hashCode();
+        result = 31 * result + srcA.hashCode();
+        result = 31 * result + srcB.hashCode();
+        result = 31 * result + atype.hashCode();
+        return result;
+    }
 }
