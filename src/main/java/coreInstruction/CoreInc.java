@@ -1,5 +1,11 @@
 package coreInstruction;
 
+import instruction_type.Addressing_mode;
+import instruction_type.Immediate;
+import instruction_type.Operand;
+import instruction_type.Register;
+import subneg.Subneg;
+
 import java.util.ArrayList;
 
 /**
@@ -7,26 +13,20 @@ import java.util.ArrayList;
  */
 // instruction.Add instruction
 public class CoreInc extends CoreInstruction {
-    private String src;
-    private Addressing_mode src_mode;
-    private String dst; // both the source and destination
-    private Addressing_mode dst_mode;
 
-    public CoreInc(String src, Addressing_mode src_mode, String dst, Addressing_mode dst_mode) {
-        this.src = src;
-        this.src_mode = src_mode;
-        this.dst = dst;
-        this.dst_mode = dst_mode;
+    public CoreInc(Operand src, Addressing_mode src_mode, Operand dst, Addressing_mode dst_mode) {
+        super(src, src_mode, dst, dst_mode);
     }
 
     public ArrayList<Subneg> generate() {
         ArrayList<Subneg> result = new ArrayList<Subneg>();
-        result.add(new Subneg(Addressing_mode.REGISTER, Register.SPEC_RF.binary_representation(),
-                Addressing_mode.REGISTER, Register.SPEC_RF.binary_representation())); // clear RF
-        result.add(new Subneg(src_mode, src, Addressing_mode.REGISTER, Register.SPEC_RF.binary_representation())); // move src to RF
-        result.add(new Subneg(Addressing_mode.IM, "00000000",
-                Addressing_mode.REGISTER, Register.SPEC_RF.binary_representation())); // invert RF
-        result.add(new Subneg(Addressing_mode.REGISTER, Register.SPEC_RF.binary_representation(), dst_mode, dst)); // dst = RF + dst
+        result.add(new Subneg(Addressing_mode.REGISTER, Register.RF_singleton,
+                Addressing_mode.REGISTER, Register.RF_singleton)); // clear RF
+        result.add(new Subneg(this.opA_mode, opA,
+                Addressing_mode.REGISTER, Register.RF_singleton)); // move src to RF
+        result.add(new Subneg(Addressing_mode.IM, Immediate.Zeros,
+                Addressing_mode.REGISTER, Register.RF_singleton)); // invert RF
+        result.add(new Subneg(Addressing_mode.REGISTER, Register.RF_singleton, this.opB_mode, opB)); // dst = RF + dst
         return result;
     }
 }

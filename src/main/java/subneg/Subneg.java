@@ -2,36 +2,37 @@ package subneg;
 
 import instruction_type.AddressType;
 import instruction_type.Addressing_mode;
+import instruction_type.Operand;
 import utilities.Util;
 
 /**
  * Created by Quentin on 12/5/17.
  */
 public class Subneg {
-    private String opA;
-    private String opB;
+    private Operand opA;
+    private  Operand opB;
     private Addressing_mode srcA;
     private Addressing_mode srcB;
 
-    private String jumpToAddr;
+    private Operand jumpToAddr;
     private AddressType atype;
     private int relative;
 
-    public Subneg(Addressing_mode srcA, String opA, Addressing_mode srcB, String opB) {
+    public Subneg(Addressing_mode srcA, Operand opA, Addressing_mode srcB, Operand opB) {
         this(srcA, opA, srcB, opB, AddressType.PC);
     }
 
-    public Subneg(Addressing_mode srcA, String opA, Addressing_mode srcB, String opB, int relative) {
+    public Subneg(Addressing_mode srcA, Operand opA, Addressing_mode srcB, Operand opB, int relative) {
         this(srcA, opA, srcB, opB, AddressType.RELATIVE);
         this.relative = relative;
     }
 
-    public Subneg(Addressing_mode srcA, String opA, Addressing_mode srcB, String opB, String jumpAddr) {
+    public Subneg(Addressing_mode srcA, Operand opA, Addressing_mode srcB, Operand opB, Operand jumpAddr) {
         this(srcA, opA, srcB, opB, AddressType.ADDR);
         this.jumpToAddr = jumpAddr;
     }
 
-    public Subneg(Addressing_mode srcA, String opA, Addressing_mode srcB, String opB, AddressType atype) {
+    public Subneg(Addressing_mode srcA, Operand opA, Addressing_mode srcB, Operand opB, AddressType atype) {
         this.srcA = srcA;
         this.opA = opA;
         this.srcB = srcB;
