@@ -6,7 +6,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class Validation {
 
     public static boolean validate_register(String opA, String opB) {
-        if (!Register.registers.contains(opA) || !Register.registers.contains(opB))
+        if (!Register.register_lookup(opA) || !Register.register_lookup(opB))
             return false;
         return true;
     }
