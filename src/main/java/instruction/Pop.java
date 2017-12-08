@@ -1,10 +1,13 @@
+package instruction;
+
+import coreInstruction.CoreInstruction;
+
 import java.util.ArrayList;
 
-public class Iport implements Instruction {
+public class Pop implements Instruction {
 	private String dest;
 
-
-	public Iport(String dest) throws Exception {
+	public Pop (String dest) throws Exception {
 		this.dest = dest;
 	}
 

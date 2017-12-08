@@ -1,3 +1,7 @@
+package utilities;
+
+import instruction.Instruction;
+import instruction_type.Register;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**

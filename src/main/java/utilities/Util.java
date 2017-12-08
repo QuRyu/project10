@@ -1,3 +1,5 @@
+package utilities;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.math.BigInteger;
 
@@ -7,13 +9,13 @@ import java.math.BigInteger;
  */
 public class Util {
 
+    // output 8 bit long binary number
     public static String convertToBinary(String n) {
         int num = Integer.parseInt(n);
         String v = convertToBinary(num);
         return v;
-
-        //throw new NotImplementedException();
     }
+
     public static String convertToBinary(int n) {
         String v = "00000000";
         if (n > 0) {
@@ -28,11 +30,6 @@ public class Util {
 
         }
         return v;
-
-
-
-
-        //throw new NotImplementedException();
     }
 
     public static String convertToHex(String n) {
@@ -43,8 +40,4 @@ public class Util {
         throw new NotImplementedException();
     }
 
-    public static void main(){
-
-
-    }
 }

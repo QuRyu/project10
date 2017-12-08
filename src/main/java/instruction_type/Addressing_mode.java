@@ -1,3 +1,5 @@
+package instruction_type;
+
 /**
  * Created by Quentin on 12/6/17.
  */

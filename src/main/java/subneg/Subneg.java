@@ -1,36 +1,41 @@
+package subneg;
+
+import instruction_type.Addressing_mode;
+import instruction_type.Operand;
+import utilities.Util;
+
 /**
  * Created by Quentin on 12/5/17.
  */
 public class Subneg {
-    private String opA;
-    private String opB;
+    private Operand opA;
+    private  Operand opB;
     private Addressing_mode srcA;
     private Addressing_mode srcB;
 
-    private String jumpToAddr;
-    private addr_type atype;
+    private Operand jumpToAddr;
+    private AddressType atype;
     private int relative;
 
-    // type of the third parameter
-    // PC denotes sequential implementation, while ADDR denotes jump_to address
-    enum addr_type {PC, ADDR, RELATIVE}
-
-
-    public Subneg(Addressing_mode srcA, String opA, Addressing_mode srcB, String opB) {
-        this(srcA, opA, srcB, opB, addr_type.PC);
+    public enum AddressType {
+        PC, ADDR, RELATIVE, Stack_ptr;
     }
 
-    public Subneg(Addressing_mode srcA, String opA, Addressing_mode srcB, String opB, int relative) {
-        this(srcA, opA, srcB, opB, addr_type.RELATIVE);
+    public Subneg(Addressing_mode srcA, Operand opA, Addressing_mode srcB, Operand opB) {
+        this(srcA, opA, srcB, opB, AddressType.PC);
+    }
+
+    public Subneg(Addressing_mode srcA, Operand opA, Addressing_mode srcB, Operand opB, int relative) {
+        this(srcA, opA, srcB, opB, AddressType.RELATIVE);
         this.relative = relative;
     }
 
-    public Subneg(Addressing_mode srcA, String opA, Addressing_mode srcB, String opB, String jumpAddr) {
-        this(srcA, opA, srcB, opB, addr_type.ADDR);
+    public Subneg(Addressing_mode srcA, Operand opA, Addressing_mode srcB, Operand opB, Operand jumpAddr) {
+        this(srcA, opA, srcB, opB, AddressType.ADDR);
         this.jumpToAddr = jumpAddr;
     }
 
-    public Subneg(Addressing_mode srcA, String opA, Addressing_mode srcB, String opB, addr_type atype) {
+    public Subneg(Addressing_mode srcA, Operand opA, Addressing_mode srcB, Operand opB, AddressType atype) {
         this.srcA = srcA;
         this.opA = opA;
         this.srcB = srcB;
@@ -38,7 +43,7 @@ public class Subneg {
         this.atype = atype;
     }
 
-    public String dump(int curPC) {
+    public String dump(int curPC, int stack_ptr) {
         StringBuilder temp = new StringBuilder();
         temp.append(srcA.binary_representation());
         temp.append(opA);
