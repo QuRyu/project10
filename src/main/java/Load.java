@@ -8,16 +8,14 @@ public class Load implements Instruction {
     private String dst;
     private String addr;
 
-    public Load(String dst, String addr, int n, boolean isIndirect) throws Exception {
-        if (!Register.tableE.contains(dst) || !Register.tableB.contains(addr))
-            throw new Exception("wrong operand " + (Register.tableE.contains(dst) ? addr : dst) + "at line " + n);
+    public Load(String dst, String addr, boolean isIndirect) throws Exception {
         this.dst = dst;
         this.addr = addr;
         this.isIndirect = isIndirect;
     }
 
-    public Load(String dst, String addr, int n) throws Exception {
-        this(dst, addr, n,false);
+    public Load(String dst, String addr) throws Exception {
+        this(dst, addr, false);
     }
 
     public ArrayList<CoreInstruction> generate() {
