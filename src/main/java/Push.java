@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 public class Push implements Instruction {
-	private src;
+	private String src;
 
 
 	public Push (String src) throws Exception {
