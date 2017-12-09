@@ -5,7 +5,9 @@ import utilities.Util;
 public class PC implements Operand {
     private int n;
 
-    public PC() { }
+    public PC(int n) {
+        this.n = n;
+    }
 
     public void setLine(int n) {
         this.n = n;

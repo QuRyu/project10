@@ -4,7 +4,7 @@ import utilities.Util;
 
 import java.security.InvalidParameterException;
 
-public class RAM implements Operand {
+public class RAM implements Memory {
     String n;
 
     public RAM(int n) {
