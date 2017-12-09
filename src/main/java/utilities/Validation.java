@@ -10,10 +10,12 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 public class Validation {
 
+    public static boolean validate_register(String regis) {
+        return Register.register_lookup(regis);
+    }
+
     public static boolean validate_register(String opA, String opB) {
-        if (!Register.register_lookup(opA) || !Register.register_lookup(opB))
-            return false;
-        return true;
+        return Register.register_lookup(opA) || Register.register_lookup(opB);
     }
 
     public static boolean validate_instruction(String ins) {
