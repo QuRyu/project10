@@ -14,8 +14,9 @@ public class Register implements Operand {
     public static final Register RF_singleton = new Register(register_type.SPEC_RF);
     public static final Register RE_singleton = new Register(register_type.RE);
 
+    // TODO: 12/8/17 add access to PC
     public enum register_type {
-        RA, RB, RC, RD, RE, SPEC_RF, SP;
+        RA, RB, RC, RD, RE, SPEC_RF, SPEC_RG, SP;
     }
 
     public Register(register_type type) {
