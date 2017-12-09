@@ -10,8 +10,13 @@ import java.util.ArrayList;
 
 /**
  * Created by Quentin on 12/6/17.
+ *
+ * add src and sub and put the result in dst;
+ * this instruction allows different kinds of addressing modes and guarantee that those
+ * values will be written back, except when Input is used as the second argument and
+ * Output is used as the first argument (in both cases no value will be written back
+ * or read in
  */
-// instruction.Add instruction
 public class CoreInc extends CoreInstruction {
 
     public CoreInc(Operand src, Addressing_mode src_mode, Operand dst, Addressing_mode dst_mode) {
