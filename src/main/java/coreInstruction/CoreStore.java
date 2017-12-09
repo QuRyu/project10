@@ -15,13 +15,13 @@ import java.util.ArrayList;
 public class CoreStore extends CoreInstruction {
     private boolean isIndirect;
 
+    public CoreStore(Register src, Memory addr) {
+        this(src, addr, false);
+    }
+    
     public CoreStore(Register src, Memory addr, boolean isIndirect) {
         super(src, Addressing_mode.REGISTER, addr, Addressing_mode.MEMORY);
         this.isIndirect = isIndirect;
-    }
-
-    public CoreStore(Operand src, Addressing_mode src_mode, Memory addr, Addressing_mode addr_mode) {
-        super(src, src_mode, addr, addr_mode);
     }
 
     public ArrayList<Subneg> generate() {
