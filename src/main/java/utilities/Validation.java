@@ -34,11 +34,15 @@ public class Validation {
     }
 
     // addr [0..255]
-    public static boolean validate_memory_address(String addr) {
+    public static void validate_memory_address(String addr) {
         int addr1 = Integer.parseInt(addr);
-        if (addr1 <= 255 && addr1 >= 0) return true;
-        else throw new IllegalArgumentException("memory address " + addr + " is out of boundary [0..255]");
+        if (addr1 > 255 || addr1 < 0)
+            throw new IllegalArgumentException("memory address " + addr + " is out of boundary [0..255]");
 
+    }
+
+    public static void validate_immediate_value(String immediate) {
+        throw new NotImplementedException();
     }
 
     // addr is between the range [0..255] and has already been verified
