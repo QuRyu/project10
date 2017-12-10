@@ -10,8 +10,10 @@ public class Scanner {
     public static ParseResult scan(ArrayList<String> lines) {
         ArrayList<Instruction> instructions = new ArrayList<Instruction>();
         ArrayList<PC> jumpTo = new ArrayList<PC>();
+        ArrayList<PCUpdater> updaters = new ArrayList<PCUpdater>();
         Map<String, PC> labelTbl = new HashMap<String, PC>();
         Map<String, PC> unsolvedLabel = new HashMap<String, PC>();
+
 
         int line = 0;
 
@@ -19,11 +21,11 @@ public class Scanner {
             if (s.trim().equals(""))
                 continue;
 
-            String [] words = s.split("\\W+");
+            String[] words = s.split("\\W+");
             String ins = words[0];
 
             if (ins.equals("Add"))
-               instructions.add(new Add(words[1], words[2]));
+                instructions.add(new Add(words[1], words[2]));
             else if (ins.equals("Branch")) {
                 String label = words[1];
                 if (labelTbl.containsKey(label))
@@ -42,7 +44,7 @@ public class Scanner {
                     unsolvedLabel.put(label, temp);
                     instructions.add(new Call(temp));
                 }
-            } else if(ins.equals("Halt"))
+            } else if (ins.equals("Halt"))
                 instructions.add(new Halt());
             else if (ins.equals("Iport"))
                 instructions.add(new Iport(words[1]));
@@ -71,23 +73,26 @@ public class Scanner {
             else {
                 // TODO: 12/9/17 handle label case and not meaningful input
                 s.replaceAll("\\S+", "");
-                if(s.charAt(s.length()-1) == ':') { // a label
-                    String label = s.substring(0, s.length()-1);
+                if (s.charAt(s.length() - 1) == ':') { // a label
+                    String label = s.substring(0, s.length() - 1);
+                    PC temp;
                     if (unsolvedLabel.containsKey(label)) {
-                        PC temp = unsolvedLabel.get(label);
+                         temp = unsolvedLabel.get(label);
                         unsolvedLabel.remove(label); // now the label is found, remove it
                         labelTbl.put(label, temp); // add to labelTbl
                         temp.setLine(line); // update the line
-                    } else  {
-                        PC temp = new PC(line);
+                    } else {
+                        temp = new PC(line);
                         labelTbl.put(label, temp);
                     }
+                    updaters.add(new PCUpdater(temp, line));
                 } else // unspecified input
                     throw new RuntimeException("unknown argument");
             }
 
             line++; // update line number
         }
+
 
         if (unsolvedLabel.size() != 0) { // there is unknown label in the program
             StringBuilder ss = new StringBuilder();
@@ -99,7 +104,7 @@ public class Scanner {
         }
 
         ParseResult result = new ParseResult();
-        result.jumps = jumpTo;
+        result.jumps = updaters;
         result.instructions = instructions;
         return result;
     }

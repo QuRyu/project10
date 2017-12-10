@@ -1,7 +1,7 @@
 package coreInstruction;
 
 import instruction_type.Addressing_mode;
-import instruction_type.MemoryAddr;
+import instruction_type.RAM;
 import instruction_type.Register;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 public class CoreSotreTest {
 
-    MemoryAddr addr1 = new MemoryAddr(2);
+    RAM addr1 = new RAM(2);
     Register src1 = new Register(Register.register_type.RA);
-    CoreStore store1 = new CoreStore(src1, Addressing_mode.REGISTER, addr1, Addressing_mode.MEMORY);
+    CoreStore store1 = new CoreStore(src1, addr1);
 
     @Test
     public void generate_test() throws Exception {

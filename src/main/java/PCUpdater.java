@@ -1,10 +1,10 @@
 import instruction_type.PC;
 
-public class LineUpdate {
+public class PCUpdater {
     private PC pc;
     private int line;
 
-    public LineUpdate(PC pc, int line) {
+    public PCUpdater(PC pc, int line) {
         this.pc = pc;
         this.line = line;
     }
