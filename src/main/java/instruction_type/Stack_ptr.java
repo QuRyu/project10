@@ -9,7 +9,7 @@ import utilities.Util;
 public class Stack_ptr implements Memory {
     private int n; // the address pointed to
 
-    public static Stack_ptr singleton = new Stack_ptr(-1);
+    public static Stack_ptr singleton = new Stack_ptr(0);
 
     private Stack_ptr(int n) {
         this.n = n;
@@ -19,22 +19,12 @@ public class Stack_ptr implements Memory {
         return Util.convertToBinary(n, false);
     }
 
-    private void increment() {
-        n += 1;
-    }
-
-    private void decrement() {
-        n -= 1;
-    }
-
     public Stack_ptr incr_copy() {
-        increment();
-        return new Stack_ptr(n);
+        return new Stack_ptr(n++);
     }
 
     public Stack_ptr copy_decr() {
-        decrement();
-        return new Stack_ptr(n);
+        return new Stack_ptr(n--);
     }
 
     @Override
