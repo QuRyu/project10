@@ -2,25 +2,39 @@ package instruction_type;
 
 import utilities.Util;
 
-public class Stack_ptr implements Operand {
+/**
+ * Singleton pattern;
+ * every object trying to get an instance of stack_ptr must use the copy method
+ */
+public class Stack_ptr implements Memory {
     private int n; // the address pointed to
 
-    public static Stack_ptr ptr = new Stack_ptr();
+    public static Stack_ptr singleton = new Stack_ptr(-1);
 
-    private Stack_ptr() {
-        n = -1;
+    private Stack_ptr(int n) {
+        this.n = n;
     }
 
     public String binary_representation() {
         return Util.convertToBinary(n);
     }
 
-    public void increment() {
+    private void increment() {
         n += 1;
     }
 
-    public void decrement() {
+    private void decrement() {
         n -= 1;
+    }
+
+    public Stack_ptr incr_copy() {
+        increment();
+        return new Stack_ptr(n);
+    }
+
+    public Stack_ptr copy_decr() {
+        decrement();
+        return new Stack_ptr(n);
     }
 
     @Override

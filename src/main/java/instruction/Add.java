@@ -1,6 +1,10 @@
 package instruction;
 
+import coreInstruction.CoreInc;
 import coreInstruction.CoreInstruction;
+import instruction_type.Addressing_mode;
+import instruction_type.Register;
+import utilities.Validation;
 
 import java.util.ArrayList;
 
@@ -9,15 +13,18 @@ import java.util.ArrayList;
  */
 public class Add implements Instruction {
 
-    private String opA;
-    private String opB;
+    private Register src;
+    private Register dst;
 
-    public Add(String opA, String opB) throws Exception {
-        this.opA = opA;
-        this.opB = opB;
+    public Add(String src, String dst) {
+        Validation.validate_register_exception(src, dst);
+        this.src = Register.createRegister(src);
+        this.dst = Register.createRegister(dst);
     }
 
     public ArrayList<CoreInstruction> generate() {
-        return null;
+        ArrayList<CoreInstruction> result = new ArrayList<CoreInstruction>();
+        result.add(new CoreInc(src, Addressing_mode.REGISTER, dst, Addressing_mode.REGISTER));
+        return result;
     }
 }

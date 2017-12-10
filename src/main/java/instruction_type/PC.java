@@ -2,10 +2,14 @@ package instruction_type;
 
 import utilities.Util;
 
-public class PCAddr implements Operand {
+public class PC implements Operand {
     private int n;
 
-    public PCAddr() { }
+    public PC() { }
+
+    public PC(int n) {
+        this.n = n;
+    }
 
     public void setLine(int n) {
         this.n = n;
@@ -24,9 +28,9 @@ public class PCAddr implements Operand {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PCAddr pcAddr = (PCAddr) o;
+        PC pc = (PC) o;
 
-        return n == pcAddr.n;
+        return n == pc.n;
     }
 
     @Override

@@ -5,32 +5,62 @@ package instruction_type;
  */
 public enum Addressing_mode {
 
+    /**
+     * if IM is the addressing mode for the second argument, no write back will happen
+     */
     IM {
         @Override
         public String binary_representation() {
             return "000";
         }
-    }, REGISTER {
+    },
+    /**
+     * read the value from register; if it is the addressing mode for second argument, the
+     * result will be written back to the register
+     */
+    REGISTER {
         @Override
         public String binary_representation() {
             return "001";
         }
-    }, MEMORY {
+    },
+    /**
+     * read the value from memory; if it is the addressing mode for second argument, the
+     * result will be written back to the memory address
+     */
+    MEMORY {
         @Override
         public String binary_representation() {
             return "010";
         }
-    }, Input {
+    },
+    /**
+     * read the value from iport; if it is the addressing mode for second argument, no
+     * write back will happen
+     */
+    Input {
         @Override
         public String binary_representation() {
             return "011";
         }
-    }, Output {
+    },
+    /**
+     * if it is the addressing mode for the first argument, no argument will be read;
+     * if it is the addressing mode for second argument, the result will be written back to the oport
+     */
+    Output {
         @Override
         public String binary_representation() {
             return "100";
         }
-    }, MEMORY_INDIRECT { // read value from register, but use that value to index into memory to get the value
+    },
+    /**
+     * if it is the addressing mode for the first argument, the value of the register referenced will be
+     * used to index into memory to retrieve the value of the memory cell; similar to [RA] notation
+     * if it is the addressing mode for the second argument, the value of the register referenced will be
+     * used to index into memory to retrieve the value, and the result will be put back into the same memory address
+     */
+    MEMORY_INDIRECT {
         @Override
         public String binary_representation() {
             return "101";

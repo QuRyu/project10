@@ -12,10 +12,23 @@ import java.util.ArrayList;
  */
 public class Validation {
 
+    public static boolean validate_register(String regis) {
+        return Register.register_lookup(regis);
+    }
+
     public static boolean validate_register(String opA, String opB) {
-        if (!Register.register_lookup(opA) || !Register.register_lookup(opB))
-            return false;
-        return true;
+        return Register.register_lookup(opA) && Register.register_lookup(opB);
+    }
+
+    // check if the register is valid; throw exception if not
+    public static void validate_register_exception(String regis) {
+        if (!validate_register(regis))
+            throw new IllegalArgumentException("Register " + regis + " is not valid");
+    }
+
+    public static void validate_register_exception(String opA, String opB) {
+        if (!validate_register(opA, opB))
+            throw new IllegalArgumentException("Register " + (validate_register(opA) ? opB : opA) + " is not valid");
     }
 
     public static boolean validate_instruction(String ins) {
@@ -35,13 +48,15 @@ public class Validation {
     }
 
     // addr [0..255]
-    public static boolean validate_memory_address(String addr) {
+    public static void validate_memory_address(String addr) {
         int addr1 = Integer.parseInt(addr);
-        if (addr1 <= 255 && addr1 >= 0) {
-            return true;
-        }else {
-            throw new IllegalArgumentException("argument our of range, should be between 0 and 255");
-        }
+        if (addr1 > 255 || addr1 < 0)
+            throw new IllegalArgumentException("memory address " + addr + " is out of boundary [0..255]");
+
+    }
+
+    public static void validate_immediate_value(String immediate) {
+        throw new NotImplementedException();
     }
 
 

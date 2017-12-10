@@ -7,17 +7,21 @@ import java.util.ArrayList;
 
 /**
  * Created by Quentin on 12/6/17.
- * Invariant, both dst and addr should be correct
+ *
+ * Read value from memory;
+ * this instruction strictly follows its counterpart in project8,
+ * it only takes memory address from the first register and take register as
+ * the second argument
  */
 public class CoreLoad extends CoreInstruction {
     private boolean isImmediate;
 
-    public CoreLoad(MemoryAddr addr, Addressing_mode addr_mode, Register dst, Addressing_mode dst_mode) {
-        this(addr, addr_mode, dst, dst_mode, false);
+    public CoreLoad(Memory addr, Register dst) {
+        this(addr, dst, false);
     }
 
-    public CoreLoad(MemoryAddr addr, Addressing_mode addr_mode, Register dst, Addressing_mode dst_mode, boolean isImmediate) {
-        super(addr, addr_mode, dst, dst_mode);
+    public CoreLoad(Memory addr, Register dst, boolean isImmediate) {
+        super(addr, Addressing_mode.MEMORY, dst, Addressing_mode.REGISTER);
         this.isImmediate = isImmediate;
     }
 

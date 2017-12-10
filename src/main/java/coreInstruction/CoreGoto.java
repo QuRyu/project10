@@ -7,11 +7,13 @@ import java.util.ArrayList;
 
 /**
  * Created by Quentin on 12/6/17.
+ *
+ * jump tp the memory address given
  */
 public class CoreGoto extends CoreInstruction {
-    private PCAddr jump;
+    private PC jump;
 
-    public CoreGoto(PCAddr jump) {
+    public CoreGoto(PC jump) {
         super(jump, Addressing_mode.MEMORY, jump, Addressing_mode.MEMORY);
     }
 
