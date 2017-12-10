@@ -10,18 +10,18 @@ import java.math.BigInteger;
 public class Util {
 
     // output 8 bit long binary number
-    public static String convertToBinary(String n) {
-        if (Integer.parseInt(n) >= -128 && Integer.parseInt(n) <= 127) {
-            int num = Integer.parseInt(n);
-            String v = convertToBinary(num);
-            return v;
-        }else{
-            throw new IllegalArgumentException("argument our of range, should be between -128 and 127");
-        }
+    //flag: if true, use 2's compliment, if not, use unsigned
+    public static String convertToBinary(String n, boolean twosCompliment) {
+
+
+        int num = Integer.parseInt(n);
+        String v = convertToBinary(num, twosCompliment);
+        return v;
+
     }
 
-    public static String convertToBinary(int n) {
-        if (n >= -128 && n <= 127) {
+    public static String convertToBinary(int n, boolean twosCompliment) {
+        if ((twosCompliment == true && n >= -128 && n <= 127) || (twosCompliment == false && n >= 0 && n <= 255) ) {
             String v = "00000000";
             if (n > 0) {
 
