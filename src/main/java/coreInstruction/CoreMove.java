@@ -33,6 +33,7 @@ public class CoreMove extends CoreInstruction {
                 Addressing_mode.REGISTER, Register.RF_singleton)); // move src to RF
         result.add(new Subneg(Addressing_mode.REGISTER, Register.RF_singleton,
                 this.opB_mode, this.opB)); // move RF to dst
+        // TODO: 12/9/17 if the dst is oport, argument will be written directly, make sure do not clear oport
         return result;
     }
 }

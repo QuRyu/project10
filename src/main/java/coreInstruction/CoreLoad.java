@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * the second argument
  */
 public class CoreLoad extends CoreInstruction {
-    private boolean isImmediate;
+    private boolean isImmediate; // TODO: 12/9/17 make sure it is immediate or indirect
 
     public CoreLoad(Memory addr, Register dst) {
         this(addr, dst, false);
