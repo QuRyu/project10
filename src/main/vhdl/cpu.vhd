@@ -1,4 +1,4 @@
--- Template by Zilin Chen
+-- Zilin Chen
 -- CPU design for one instruction CPU (subneg)
 -- CS 232 Final Project
 
@@ -22,6 +22,8 @@ entity cpu is
 		REview : out std_logic_vector(15 downto 0);		
 		RFview : out std_logic_vector(15 downto 0); -- special internal register
 		RGview : out std_logic_vector(15 downto 0); -- halt register
+		temp1View: out std_logic_vector(15 downto 0); -- view value for oprand1
+		temp2View: out std_logic_vector(15 downto 0); -- view value for oprand2
 		
 		iport : in  std_logic_vector(15 downto 0);  -- input port
 		oport : out std_logic_vector(15 downto 0)  -- output port
@@ -78,6 +80,8 @@ architecture rtl of cpu is
 	signal MBR: std_logic_vector(15 downto 0);
 	signal MAR: std_logic_vector(7 downto 0);
 	signal OUTREG: std_logic_vector(15 downto 0); -- output
+	signal OUTTEMP1: std_logic_vector(15 downto 0); -- debug purpose
+	signal OUTTEMP2: std_logic_vector(15 downto 0); -- debug purpose
 	signal ROM_data: std_logic_vector(29 downto 0);
 	signal RAM_data: std_logic_vector(15 downto 0);
 	signal RAM_we: std_logic;
@@ -106,6 +110,8 @@ begin
 			PC <= "00000000";
 			IR <= "000000000000000000000000000000";
 			OUTREG <= "0000000000000000";
+			OUTTEMP1 <= "0000000000000000";
+			OUTTEMP2 <= "0000000000000000";
 			MAR <= "00000000";
 			MBR <= "0000000000000000";
 			RA <= "0000000000000000";
@@ -225,6 +231,7 @@ begin
 				
 				-- second oprand
 				when ExecuteB =>
+					OUTTEMP1 <= std_logic_vector(temp1);
 					-- set up next state
 					if IR(18 downto 16) = "010" or IR(18 downto 16) = "011" then
 						state <= Execute_Memory_Wait3;
@@ -308,11 +315,12 @@ begin
 					
 				-- do subtraction
 				when Execute_Sub =>
+					OUTTEMP2 <= std_logic_vector(temp2);
 					if RG /= "0000000000000000" then
 						state <= Halt;
 					else
 						state <= Execute_Branch;
-						temp2 <= temp2 - temp1;
+						temp2 <= temp1 - temp2;
 					end if;
 				
 				-- check for branch
@@ -334,6 +342,8 @@ begin
 					end if;
 					
 					case IR(18 downto 16) is
+						when "000" =>
+							OUTREG <= std_logic_vector(temp2);
 						--load back to register
 						when "001" =>
 							case IR(11 downto 8) is
@@ -423,7 +433,8 @@ begin
 	REview <= std_logic_vector(RE);
 	RFview <= std_logic_vector(RF);
 	RGview <= std_logic_vector(RG);
-	
+	temp1View <= OUTTEMP1;
+	temp2View <= OUTTEMP2;
 	oport <= OUTREG; -- internal output register
 
 
