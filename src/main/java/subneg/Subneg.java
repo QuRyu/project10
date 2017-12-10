@@ -53,9 +53,9 @@ public class Subneg {
             case ADDR:
                 temp.append(jumpToAddr);
             case PC:
-                temp.append(Util.convertToBinary(curPC));
+                temp.append(Util.convertToBinary(curPC, false));
             case RELATIVE:
-                temp.append(Util.convertToBinary(curPC + relative));
+                temp.append(Util.convertToBinary(curPC + relative, false));
         }
         temp.append("00");
         assert (temp.length() == 32);

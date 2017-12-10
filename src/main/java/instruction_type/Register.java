@@ -25,7 +25,7 @@ public class Register implements Operand {
 
     // This function only helps create registers RA, RB, RC, RD, RE,
     public static Register createRegister(String s) {
-        if (s == "RA")
+        if (s.equals("RA"))
             return new Register(register_type.RA);
         else if (s.equals("RB"))
             return new Register(register_type.RB);
@@ -35,7 +35,7 @@ public class Register implements Operand {
             return new Register(register_type.RD);
         else if (s.equals("RE"))
             return new Register(register_type.RE);
-        throw new RuntimeException("register " + s + " is not present");
+        throw new IllegalArgumentException("register " + s + " is not present");
     }
     // register table
     private static final ArrayList<String> registers = new ArrayList<String>(Arrays.asList("RA", "RB", "RC", "RD", "RE", "SP", "PC"));
@@ -48,9 +48,11 @@ public class Register implements Operand {
         register_tbl.put(register_type.RD, "00000011");
         register_tbl.put(register_type.RE, "00000100");
         register_tbl.put(register_type.SPEC_RF, "000000101");
-        register_tbl.put(register_type.SP, "000000110");
-        register_tbl.put(register_type.PC, "000000111");
-        register_tbl.put(register_type.SPEC_RG, "00001000");
+        register_tbl.put(register_type.SPEC_RG, "00000110");
+        register_tbl.put(register_type.SP, "000000111");
+        register_tbl.put(register_type.PC, "000001000");
+        register_tbl.put(register_type.IPORT, "00001001");
+        register_tbl.put(register_type.OPORT, "00001010");
     }
 
     public static boolean register_lookup(String r)  {

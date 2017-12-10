@@ -35,26 +35,6 @@ public enum Addressing_mode {
         }
     },
     /**
-     * read the value from iport; if it is the addressing mode for second argument, no
-     * write back will happen
-     */
-    Input {
-        @Override
-        public String binary_representation() {
-            return "011";
-        }
-    },
-    /**
-     * if it is the addressing mode for the first argument, no argument will be read;
-     * if it is the addressing mode for second argument, the result will be written back to the oport
-     */
-    Output {
-        @Override
-        public String binary_representation() {
-            return "100";
-        }
-    },
-    /**
      * if it is the addressing mode for the first argument, the value of the register referenced will be
      * used to index into memory to retrieve the value of the memory cell; similar to [RA] notation
      * if it is the addressing mode for the second argument, the value of the register referenced will be
@@ -63,7 +43,7 @@ public enum Addressing_mode {
     MEMORY_INDIRECT {
         @Override
         public String binary_representation() {
-            return "101";
+            return "011";
         }
     };
 

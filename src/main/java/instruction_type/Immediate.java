@@ -14,7 +14,7 @@ public class Immediate implements Operand {
     public Immediate(int n) {
         if (n < -128 || n > 127)
             throw new InvalidParameterException("Immediate value " + n + " is out of range[-128, 127]");
-        this.n = Util.convertToBinary(n);
+        this.n = Util.convertToBinary(n, true);
     }
 
     public String binary_representation() {

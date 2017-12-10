@@ -16,7 +16,7 @@ public class Stack_ptr implements Memory {
     }
 
     public String binary_representation() {
-        return Util.convertToBinary(n);
+        return Util.convertToBinary(n, false);
     }
 
     private void increment() {

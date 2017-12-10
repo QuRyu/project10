@@ -20,7 +20,7 @@ public class PC implements Operand {
     }
 
     public String binary_representation() {
-        return Util.convertToBinary(n);
+        return Util.convertToBinary(n, false);
     }
 
     @Override

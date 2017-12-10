@@ -10,7 +10,7 @@ public class RAM implements Memory {
     public RAM(int n) {
         if (n < 0 || n > 255)
             throw new InvalidParameterException("Memory address " + n + " should be in the range [0..255]");
-        this.n = Util.convertToBinary(n);
+        this.n = Util.convertToBinary(n, false);
     }
 
     public String binary_representation() {
