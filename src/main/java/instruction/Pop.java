@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Pop implements Instruction {
     private Register dst;
 
-	public Pop (String dst) throws Exception {
+	public Pop (String dst) {
 		Validation.validate_register_exception(dst);
 		this.dst = Register.createRegister(dst);
 	}

@@ -13,7 +13,7 @@ public class Sub implements Instruction {
 	private Register src;
 	private Register dst;
 
-	public Sub(String src, String dst) throws Exception {
+	public Sub(String src, String dst) {
 		Validation.validate_register_exception(src, dst);
 		this.src = Register.createRegister(src);
 		this.dst = Register.createRegister(dst);
