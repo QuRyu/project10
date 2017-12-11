@@ -24,7 +24,7 @@ public class Stack_ptr implements Memory {
     }
 
     public Stack_ptr copy_decr() {
-        return new Stack_ptr(n--);
+        return new Stack_ptr(--n);
     }
 
     @Override
