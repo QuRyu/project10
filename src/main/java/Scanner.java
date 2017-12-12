@@ -72,7 +72,7 @@ public class Scanner {
                 instructions.add(new Sub(words[1], words[2]));
             else {
                 // TODO: 12/9/17 handle label case and not meaningful input
-                s.replaceAll("\\S+", "");
+                s = s.replaceAll("\\S+", "");
                 if (s.charAt(s.length() - 1) == ':') { // a label
                     String label = s.substring(0, s.length() - 1);
                     PC temp;

@@ -58,7 +58,7 @@ public class Subneg {
                 temp.append(Util.convertToBinary(curPC + relative, false));
         }
         temp.append("00");
-        assert (temp.length() == 32);
+        assert (temp.length() == 30);
         return temp.toString();
     }
 
