@@ -1,47 +1,41 @@
 import org.junit.Assert;
-import instruction.*;
-import instruction_type.*;
-import utilities.Util;
+import org.junit.Test;
 
-import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class IntegratedTest {
-    try {
-        BufferedReader fin = new BufferedReader(new FileReader(args[1]));
-        BufferedWriter fout = new BufferedWriter(new FileWriter(args[1] + ".mif"));
-        String tempLine;
 
-        ArrayList<String> lines = new ArrayList<String>();
-        while ((tempLine =fin.readLine()) != null)
-            lines.add(tempLine);
-
-        ArrayList<String> instructions = Generator.generateCoreInstruction(Scanner.scan(lines));
-
-        int line = 0;
-
-        fout.write("DEPTH = 256;\n");
-        fout.write("WIDTH = 30;\n");
-        fout.write("ADDRESS_WIDTH=HEX;\n");
-        fout.write("DATA_RADIX=BIN;\n");
-        fout.write("CONTENT");
-        fout.write("BEGIN");
-        for (String s : instructions)
-            fout.write(Util.convertToHex(line++) + " : " + s + ";\n");
-        if (line < 255)
-            fout.write("[" + Util.convertToHex(line) + Util.convertToHex(255) + "] : " +
-                    "111111111111111111111111111111\n");
-        else if(line == 255)
-            fout.write(Util.convertToHex(255) + " : " +
-                    "111111111111111111111111111111\n");
-        fout.write("END\n");
-
-    } catch (FileNotFoundException e) {
-        System.out.println("Could not find file " + args[1]);
-        e.printStackTrace();
-    } catch (IOException e) {
-        System.out.println("Failed to write file");
-        e.printStackTrace();
+    public void scaffold(ArrayList<String> program, ArrayList<String> expected) {
+        ArrayList<String> result = Generator.generateCoreInstruction(Scanner.scan(program));
+        for (int i = 0; i < expected.size(); i++) {
+            Assert.assertTrue("generated program is not the same at index " + i + "\n" +
+                    "expected: " + expected.get(i) + "\n" +
+                    "generated: " + result.get(i), expected.get(i).equals(result.get(i)));
+        }
     }
+
+    @Test
+    public void test1() {
+        ArrayList<String> program = new ArrayList<String>();
+        program.add("Movei 2 RB");
+        program.add("Push RB");
+        program.add("label: ");
+        program.add("Add RB RA");
+        program.add("Branch label");
+
+
+        ArrayList<String> expected = new ArrayList<String>();
+        expected.add("001" + "00000001" + "001" + "00000001" + "00000001");
+        expected.add("000" + "00000010" + "001" + "00000001" + "00000010");
+        expected.add("010" + "00000000" + "010" + "00000000" + "00000011");
+        expected.add("001" + "00000001" + "010" + "00000000" + "00000100");
+        expected.add("001" + "00000101" + "001" + "00000101" + "00000101");
+        expected.add("001" + "00000001" + "001" + "00000101" + "00000110");
+        expected.add("000" + "00000000" + "001" + "00000101" + "00000111");
+        expected.add("001" + "00000000" + "001" + "00000101" + "00001000");
+        expected.add("000" + "11111111" + "000" + "00000000" + "00000011"); // TODO: 12/12/17 explnation for why it is 011 instead of 100; CPU architecture
+
+        scaffold(program, expected);
+    }
+
 }

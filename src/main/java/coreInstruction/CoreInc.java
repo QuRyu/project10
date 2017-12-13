@@ -31,7 +31,7 @@ public class CoreInc extends CoreInstruction {
                 Addressing_mode.REGISTER, Register.RF_singleton)); // move src to RF
         result.add(new Subneg(Addressing_mode.IM, Immediate.Zeros,
                 Addressing_mode.REGISTER, Register.RF_singleton)); // invert RF
-        result.add(new Subneg(Addressing_mode.REGISTER, Register.RF_singleton, this.opB_mode, opB)); // dst = RF + dst
+        result.add(new Subneg(this.opB_mode, opB, Addressing_mode.REGISTER, Register.RF_singleton)); // dst = RF + dst
         return result;
     }
 }

@@ -15,25 +15,35 @@ import java.util.ArrayList;
  */
 public class CoreMove extends CoreInstruction {
 
+    private boolean isImmediate;
+
     public CoreMove(Register src, Register dst) {
         super(src, Addressing_mode.REGISTER, dst, Addressing_mode.REGISTER);
     }
 
     public CoreMove(Immediate src, Register dst) {
         super(src, Addressing_mode.IM, dst, Addressing_mode.REGISTER);
+        isImmediate = true;
     }
 
     public ArrayList<Subneg> generate() {
         ArrayList<Subneg> result = new ArrayList<Subneg>();
-        result.add(new Subneg(Addressing_mode.REGISTER, Register.RF_singleton,
-                Addressing_mode.REGISTER, Register.RF_singleton)); // clear RF
-        result.add(new Subneg(Addressing_mode.REGISTER, this.opB,
-                Addressing_mode.REGISTER, this.opB)); // clear dst
-        result.add(new Subneg(this.opA_mode, this.opA,
-                Addressing_mode.REGISTER, Register.RF_singleton)); // move src to RF
-        result.add(new Subneg(Addressing_mode.REGISTER, Register.RF_singleton,
-                this.opB_mode, this.opB)); // move RF to dst
-        // TODO: 12/9/17 if the dst is oport, argument will be written directly, make sure do not clear oport
+        if (isImmediate) {
+            result.add(new Subneg(Addressing_mode.REGISTER, opB,
+                    Addressing_mode.REGISTER, opB));
+            result.add(new Subneg(Addressing_mode.IM, opA,
+                    Addressing_mode.REGISTER, opB));
+        }
+        else{
+            result.add(new Subneg(Addressing_mode.REGISTER, Register.RF_singleton,
+                    Addressing_mode.REGISTER, Register.RF_singleton)); // clear RF
+            result.add(new Subneg(Addressing_mode.REGISTER, this.opB,
+                    Addressing_mode.REGISTER, this.opB)); // clear dst
+            result.add(new Subneg(this.opA_mode, this.opA,
+                    Addressing_mode.REGISTER, Register.RF_singleton)); // move src to RF
+            result.add(new Subneg(Addressing_mode.REGISTER, Register.RF_singleton,
+                    this.opB_mode, this.opB)); // move RF to dst
+        }
         return result;
     }
 }

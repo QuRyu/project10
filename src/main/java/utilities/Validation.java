@@ -2,10 +2,6 @@ package utilities;
 
 import instruction.Instruction;
 import instruction_type.Register;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-import java.util.Arrays;
-import java.math.BigInteger;
-import java.util.ArrayList;
 /**
  * Created by Quentin on 12/6/17.
  * Edited by Lucia on 12/8/2017
@@ -56,7 +52,9 @@ public class Validation {
     }
 
     public static void validate_immediate_value(String immediate) {
-        throw new NotImplementedException();
+        int value = Integer.parseInt(immediate);
+        if (value < -128 || value > 127)
+            throw new IllegalArgumentException("immediate value " + immediate + " should be in the range [-128, 127]");
     }
 
 

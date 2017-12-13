@@ -44,21 +44,24 @@ public class Subneg {
     }
 
     public String dump(int curPC) {
-        StringBuilder temp = new StringBuilder();
+        StringBuilder temp = new StringBuilder("");
         temp.append(srcA.binary_representation());
-        temp.append(opA);
+        temp.append(opA.binary_representation());
         temp.append(srcB.binary_representation());
-        temp.append(opB);
+        temp.append(opB.binary_representation());
         switch (atype) {
             case ADDR:
-                temp.append(jumpToAddr);
+                temp.append(jumpToAddr.binary_representation());
+                break;
             case PC:
-                temp.append(Util.convertToBinary(curPC, false));
+                temp.append(Util.convertToBinary(curPC+1, false));
+                break;
             case RELATIVE:
                 temp.append(Util.convertToBinary(curPC + relative, false));
+                break;
         }
-        temp.append("00");
-        assert (temp.length() == 30);
+
+        assert (temp.toString().length() == 30);
         return temp.toString();
     }
 

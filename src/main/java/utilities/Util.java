@@ -1,6 +1,5 @@
 package utilities;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.math.BigInteger;
 
 /**
@@ -15,13 +14,11 @@ public class Util {
 
 
         int num = Integer.parseInt(n);
-        String v = convertToBinary(num, twosCompliment);
-        return v;
-
+        return convertToBinary(num, twosCompliment);
     }
 
     public static String convertToBinary(int n, boolean twosCompliment) {
-        if ((twosCompliment == true && n >= -128 && n <= 127) || (twosCompliment == false && n >= 0 && n <= 255) ) {
+        if ((twosCompliment && n >= -128 && n <= 127) || (!twosCompliment && n >= 0 && n <= 255) ) {
             String v = "00000000";
             if (n > 0) {
 
@@ -42,7 +39,6 @@ public class Util {
                     v = v.substring(0, 8 - l) + Integer.toBinaryString(num1);
                 }else{
                     v = v.substring(0, 8 - l);
-
                 }
             }
             return v;

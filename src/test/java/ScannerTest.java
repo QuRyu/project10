@@ -1,10 +1,14 @@
 import org.junit.Assert;
 import instruction.*;
 import instruction_type.*;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ScannerTest {
+
+    @Test
     public void scan_test() {
         ArrayList<String> instructions = new ArrayList<String>(Arrays.asList("MOVE RA RB", "ADD 8 RC", "BRANCH 0", "ADDDD RA RB"));
 

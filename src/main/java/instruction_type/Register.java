@@ -9,7 +9,7 @@ import java.util.Map;
  * Created by Quentin on 12/5/17.
  */
 public class Register implements Operand {
-    private register_type type;
+    register_type type;
 
     public static final Register RF_singleton = new Register(register_type.SPEC_RF);
     public static final Register RE_singleton = new Register(register_type.RE);
@@ -47,10 +47,10 @@ public class Register implements Operand {
         register_tbl.put(register_type.RC, "00000010");
         register_tbl.put(register_type.RD, "00000011");
         register_tbl.put(register_type.RE, "00000100");
-        register_tbl.put(register_type.SPEC_RF, "000000101");
+        register_tbl.put(register_type.SPEC_RF, "00000101");
         register_tbl.put(register_type.SPEC_RG, "00000110");
-        register_tbl.put(register_type.SP, "000000111");
-        register_tbl.put(register_type.PC, "000001000");
+        register_tbl.put(register_type.SP, "00000111");
+        register_tbl.put(register_type.PC, "00001000");
         register_tbl.put(register_type.IPORT, "00001001");
         register_tbl.put(register_type.OPORT, "00001010");
     }
