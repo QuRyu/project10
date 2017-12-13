@@ -36,6 +36,15 @@ public class Scanner {
                         unsolvedLabel.put(label, temp);
                         instructions.add(new Branch(temp));
                     }
+                } else if (ins.equals("BranchN")){
+                    String label = words[1];
+                    if (labelTbl.containsKey(label))
+                        instructions.add(new Branch(labelTbl.get(label), words[2]));
+                    else {
+                        PC temp = new PC();
+                        unsolvedLabel.put(label, temp);
+                        instructions.add(new Branch(temp, words[2]));
+                    }
                 } else if (ins.equals("Call")) {
                     String label = words[1];
                     if (labelTbl.containsKey(label))
