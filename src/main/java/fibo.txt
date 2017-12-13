@@ -1,0 +1,19 @@
+Movei -1 RE
+Movei 10 RD
+Movei 1 RA
+Oport RA
+Movei 1 RB
+Oport RB
+
+add:
+Add RB RA
+Oport RA
+Move RA RC
+Move RB RA
+Move RC RB
+Add RE RD
+BranchN finish RD
+Branch add
+
+finish:
+Halt
